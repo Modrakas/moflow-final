@@ -4,235 +4,224 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MoFlow Lab — R&D Technical Residency</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/index.css" />
 </head>
-<body class="body" data-scroll-container>
+  <body class="body" data-scroll-container>
 
-  <!-- Custom Cursor -->
-  <div class="cursor" id="cursor">
-    <!-- Cat paw replaces the plain dot -->
-    <svg class="cursor__paw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" aria-hidden="true">
-      <!-- Toe beans -->
-      <ellipse cx="10" cy="13" rx="4.2" ry="5"   fill="currentColor"/>
-      <ellipse cx="20" cy="9"  rx="4.2" ry="5"   fill="currentColor"/>
-      <ellipse cx="30" cy="13" rx="4.2" ry="5"   fill="currentColor"/>
-      <ellipse cx="5"  cy="22" rx="3.4" ry="4.2" fill="currentColor"/>
-      <!-- Main central pad -->
-      <ellipse cx="20" cy="28" rx="11"  ry="9"   fill="currentColor"/>
-    </svg>
-    <div class="cursor__ring"></div>
-  </div>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor">
+      <!-- Cat paw replaces the plain dot -->
+      <svg class="cursor__paw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" aria-hidden="true">
+        <!-- Toe beans -->
+        <ellipse cx="10" cy="13" rx="4.2" ry="5"   fill="currentColor"/>
+        <ellipse cx="20" cy="9"  rx="4.2" ry="5"   fill="currentColor"/>
+        <ellipse cx="30" cy="13" rx="4.2" ry="5"   fill="currentColor"/>
+        <ellipse cx="5"  cy="22" rx="3.4" ry="4.2" fill="currentColor"/>
+        <!-- Main central pad -->
+        <ellipse cx="20" cy="28" rx="11"  ry="9"   fill="currentColor"/>
+      </svg>
+      <div class="cursor__ring"></div>
+    </div>
 
-  <!-- Noise Overlay for Project Hover -->
-  <canvas class="noise-canvas" id="noiseCanvas" aria-hidden="true"></canvas>
+    <!-- Noise Overlay for Project Hover -->
+    <canvas class="noise-canvas" id="noiseCanvas" aria-hidden="true"></canvas>
 
-  <!-- ========== HEADER / NAV ========== -->
-  <header class="header">
-    <nav class="nav">
-      <div class="nav__logo">
-        <span class="nav__logo-mark">◈</span>
-        <span class="nav__logo-text">MoFlow<span class="nav__logo-accent">Lab</span></span>
+    <!-- ========== HEADER / NAV ========== -->
+    <header class="header">
+      <nav class="nav">
+        <div class="nav__logo">
+          <span class="nav__logo-mark">◈</span>
+          <span class="nav__logo-text">MoFlow<span class="nav__logo-accent">Lab</span></span>
+        </div>
+        <ul class="nav__links">
+          <li class="nav__item"><a href="#work" class="nav__link" data-text="Work">Work</a></li>
+          <li class="nav__item"><a href="#about" class="nav__link" data-text="About">About</a></li>
+          <li class="nav__item"><a href="#contact" class="nav__link" data-text="Contact">Contact</a></li>
+        </ul>
+        <div class="nav__cta">
+          <a href="#contact" class="btn btn--outline">
+            <span>Initiate Experiment</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+      <div class="hero__grid-overlay" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <div class="hero__eyebrow">
+          <span class="hero__eyebrow-line"></span>
+          <span class="hero__eyebrow-text mono">[ Technical Residency / R&D v1.0 ]</span>
+        </div>
+
+        <h1 class="hero__headline">
+          <span class="hero__headline-line" data-split>Experiments</span>
+          <span class="hero__headline-line hero__headline-line--indent" data-split>
+            <em class="hero__headline-em">in motion</em>
+            <span class="hero__headline-amp">&amp;</span>
+          </span>
+          <span class="hero__headline-line hero__headline-line--wide" data-split>logic.</span>
+        </h1>
+
+        <div class="hero__meta">
+          <p class="hero__descriptor mono">
+            A solo R&D lab. Stress-testing motion, DOM,<br />
+            and interface logic — no frameworks, no shortcuts.
+          </p>
+          <div class="hero__status">
+            <span class="hero__status-dot"></span>
+            <span class="mono hero__status-text">Lab open — Experiments running</span>
+          </div>
+        </div>
       </div>
-      <ul class="nav__links">
-        <li class="nav__item"><a href="#work" class="nav__link" data-text="Work">Work</a></li>
-        <li class="nav__item"><a href="#about" class="nav__link" data-text="About">About</a></li>
-        <li class="nav__item"><a href="#contact" class="nav__link" data-text="Contact">Contact</a></li>
+
+      <div class="hero__counter mono" aria-label="Section indicator">
+        <span>01</span><span class="hero__counter-sep">/</span><span>06</span>
+      </div>
+
+      <div class="hero__scroll-cue" aria-label="Scroll down">
+        <span class="mono">Scroll</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ========== MARQUEE ========== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span>Vanilla JS</span><span class="marquee__sep">◈</span>
+          <span>Direct DOM</span><span class="marquee__sep">◈</span>
+          <span>GSAP / WebGL</span><span class="marquee__sep">◈</span>
+          <span>60fps Target</span><span class="marquee__sep">◈</span>
+          <span>Zero Frameworks</span><span class="marquee__sep">◈</span>
+          <span>Open Lab</span><span class="marquee__sep">◈</span>
+        </div>
+        <div class="marquee__group" aria-hidden="true">
+          <span>Vanilla JS</span><span class="marquee__sep">◈</span>
+          <span>Direct DOM</span><span class="marquee__sep">◈</span>
+          <span>GSAP / WebGL</span><span class="marquee__sep">◈</span>
+          <span>60fps Target</span><span class="marquee__sep">◈</span>
+          <span>Zero Frameworks</span><span class="marquee__sep">◈</span>
+          <span>Open Lab</span><span class="marquee__sep">◈</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== WORK / PROJECTS ========== -->
+    <section class="work" id="work">
+      <div class="work__header">
+        <div class="work__header-top">
+          <div class="work__header-label mono">[ Lab Logs / Active Experiments ]</div>
+          <div class="work__status-label mono" aria-hidden="true">
+            <span class="work__status-label-dot"></span>
+            Noise-Kernel: Active
+          </div>
+        </div>
+        <h2 class="work__header-title">R&D Index</h2>
+      </div>
+
+      <ul class="projects" id="projectList" aria-live="polite" aria-label="Lab experiments">
+        <!-- Populated at runtime by DataManager from data/projects.json -->
       </ul>
-      <div class="nav__cta">
-        <a href="#contact" class="btn btn--outline">
-          <span>Initiate Experiment</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="about" id="about">
+      <div class="about__layout">
+        <div class="about__left">
+          <span class="about__label mono">[ R&D Lab / Open Residency ]</span>
+          <h2 class="about__title">
+            Craft<br/>without<br/><em>compromise.</em>
+          </h2>
+        </div>
+        <div class="about__right">
+          <p class="about__body">
+            MoFlow Lab is a self-directed Technical Residency. No senior developer, no studio safety net — just a self-taught engineer who refuses to reach for a framework when raw logic will do.
+          </p>
+          <p class="about__body">
+            Every experiment here is a deliberate stress-test: a constraint set, a performance target, and a rule against abstraction until it's earned. The output is the proof.
+          </p>
+          <div class="about__stats">
+            <div class="about__stat">
+              <span class="about__stat-num">60</span>
+              <span class="about__stat-label mono">FPS Target</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-num">0</span>
+              <span class="about__stat-label mono">Frameworks</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-num">100%</span>
+              <span class="about__stat-label mono">TypeScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Capabilities ticker -->
+      <div class="capabilities">
+        <div class="capabilities__header mono">[ Capabilities ]</div>
+        <div class="capabilities__grid">
+          <div class="capability">
+            <span class="capability__num mono">01</span>
+            <span class="capability__name">Vanilla JS</span>
+          </div>
+          <div class="capability">
+            <span class="capability__num mono">02</span>
+            <span class="capability__name">GSAP / Motion</span>
+          </div>
+          <div class="capability">
+            <span class="capability__num mono">03</span>
+            <span class="capability__name">WebGL / Shaders</span>
+          </div>
+          <div class="capability">
+            <span class="capability__num mono">04</span>
+            <span class="capability__name">Direct DOM</span>
+          </div>
+          <div class="capability">
+            <span class="capability__num mono">05</span>
+            <span class="capability__name">SCSS Systems</span>
+          </div>
+          <div class="capability">
+            <span class="capability__num mono">06</span>
+            <span class="capability__name">Creative Code</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA / CONTACT ========== -->
+    <section class="contact" id="contact">
+      <div class="contact__inner">
+        <span class="contact__label mono">[ Open for Collaboration ]</span>
+        <h2 class="contact__headline">
+          Got a hard<br/>problem<br/><em>to solve?</em>
+        </h2>
+        <a href="mailto:modrak@moflowlab.com" class="contact__cta">
+          <span class="contact__cta-text">modrak@moflowlab.com</span>
+          <span class="contact__cta-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 16H26M26 16L18 8M26 16L18 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
         </a>
       </div>
-    </nav>
-  </header>
+    </section>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero" id="hero">
-    <div class="hero__grid-overlay" aria-hidden="true"></div>
-
-    <div class="hero__content">
-      <div class="hero__eyebrow">
-        <span class="hero__eyebrow-line"></span>
-        <span class="hero__eyebrow-text mono">[ Technical Residency / R&D v1.0 ]</span>
-      </div>
-
-      <h1 class="hero__headline">
-        <span class="hero__headline-line" data-split>Experiments</span>
-        <span class="hero__headline-line hero__headline-line--indent" data-split>
-          <em class="hero__headline-em">in motion</em>
-          <span class="hero__headline-amp">&amp;</span>
-        </span>
-        <span class="hero__headline-line hero__headline-line--wide" data-split>logic.</span>
-      </h1>
-
-      <div class="hero__meta">
-        <p class="hero__descriptor mono">
-          A solo R&D lab. Stress-testing motion, DOM,<br />
-          and interface logic — no frameworks, no shortcuts.
-        </p>
-        <div class="hero__status">
-          <span class="hero__status-dot"></span>
-          <span class="mono hero__status-text">Lab open — Experiments running</span>
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__logo">◈ MoFlow<span>Lab</span></span>
+          <span class="footer__copy mono">◈ R&D v1.0 — Experiments ongoing.</span>
         </div>
+        <ul class="footer__socials">
+          <li><a href="#" class="footer__social mono">Instagram</a></li>
+          <li><a href="#" class="footer__social mono">Twitter/X</a></li>
+          <li><a href="#" class="footer__social mono">Behance</a></li>
+          <li><a href="#" class="footer__social mono">GitHub</a></li>
+        </ul>
       </div>
-    </div>
-
-    <div class="hero__counter mono" aria-label="Section indicator">
-      <span>01</span><span class="hero__counter-sep">/</span><span>06</span>
-    </div>
-
-    <div class="hero__scroll-cue" aria-label="Scroll down">
-      <span class="mono">Scroll</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ========== MARQUEE ========== -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <div class="marquee__group">
-        <span>Vanilla JS</span><span class="marquee__sep">◈</span>
-        <span>Direct DOM</span><span class="marquee__sep">◈</span>
-        <span>GSAP / WebGL</span><span class="marquee__sep">◈</span>
-        <span>60fps Target</span><span class="marquee__sep">◈</span>
-        <span>Zero Frameworks</span><span class="marquee__sep">◈</span>
-        <span>Open Lab</span><span class="marquee__sep">◈</span>
-      </div>
-      <div class="marquee__group" aria-hidden="true">
-        <span>Vanilla JS</span><span class="marquee__sep">◈</span>
-        <span>Direct DOM</span><span class="marquee__sep">◈</span>
-        <span>GSAP / WebGL</span><span class="marquee__sep">◈</span>
-        <span>60fps Target</span><span class="marquee__sep">◈</span>
-        <span>Zero Frameworks</span><span class="marquee__sep">◈</span>
-        <span>Open Lab</span><span class="marquee__sep">◈</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== WORK / PROJECTS ========== -->
-  <section class="work" id="work">
-    <div class="work__header">
-      <div class="work__header-top">
-        <div class="work__header-label mono">[ Lab Logs / Active Experiments ]</div>
-        <div class="work__status-label mono" aria-hidden="true">
-          <span class="work__status-label-dot"></span>
-          Noise-Kernel: Active
-        </div>
-      </div>
-      <h2 class="work__header-title">R&D Index</h2>
-    </div>
-
-    <ul class="projects" id="projectList" aria-live="polite" aria-label="Lab experiments">
-      <!-- Populated at runtime by DataManager from data/projects.json -->
-    </ul>
-  </section>
-
-  <!-- ========== ABOUT ========== -->
-  <section class="about" id="about">
-    <div class="about__layout">
-      <div class="about__left">
-        <span class="about__label mono">[ R&D Lab / Open Residency ]</span>
-        <h2 class="about__title">
-          Craft<br/>without<br/><em>compromise.</em>
-        </h2>
-      </div>
-      <div class="about__right">
-        <p class="about__body">
-          MoFlow Lab is a self-directed techni. No senior developer, no studio safety net — just a self-taught engineer who refuses to reach for a framework when raw logic will do.
-        </p>
-        <p class="about__body">
-          Every experiment here is a deliberate stress-test: a constraint set, a performance target, and a rule against abstraction until it's earned. The output is the proof.
-        </p>
-        <div class="about__stats">
-          <div class="about__stat">
-            <span class="about__stat-num">60</span>
-            <span class="about__stat-label mono">FPS Target</span>
-          </div>
-          <div class="about__stat">
-            <span class="about__stat-num">0</span>
-            <span class="about__stat-label mono">Frameworks</span>
-          </div>
-          <div class="about__stat">
-            <span class="about__stat-num">100%</span>
-            <span class="about__stat-label mono">Vanilla JS</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Capabilities ticker -->
-    <div class="capabilities">
-      <div class="capabilities__header mono">[ Capabilities ]</div>
-      <div class="capabilities__grid">
-        <div class="capability">
-          <span class="capability__num mono">01</span>
-          <span class="capability__name">Vanilla JS</span>
-        </div>
-        <div class="capability">
-          <span class="capability__num mono">02</span>
-          <span class="capability__name">GSAP / Motion</span>
-        </div>
-        <div class="capability">
-          <span class="capability__num mono">03</span>
-          <span class="capability__name">WebGL / Shaders</span>
-        </div>
-        <div class="capability">
-          <span class="capability__num mono">04</span>
-          <span class="capability__name">Direct DOM</span>
-        </div>
-        <div class="capability">
-          <span class="capability__num mono">05</span>
-          <span class="capability__name">SCSS Systems</span>
-        </div>
-        <div class="capability">
-          <span class="capability__num mono">06</span>
-          <span class="capability__name">Creative Code</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CTA / CONTACT ========== -->
-  <section class="contact" id="contact">
-    <div class="contact__inner">
-      <span class="contact__label mono">[ Open for Collaboration ]</span>
-      <h2 class="contact__headline">
-        Got a hard<br/>problem<br/><em>to solve?</em>
-      </h2>
-      <a href="mailto:modrak@moflowlab.com" class="contact__cta">
-        <span class="contact__cta-text">modrak@moflowlab.com</span>
-        <span class="contact__cta-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 16H26M26 16L18 8M26 16L18 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <div class="footer__brand">
-        <span class="footer__logo">◈ MoFlow<span>Lab</span></span>
-        <span class="footer__copy mono">◈ R&D v1.0 — Experiments ongoing.</span>
-      </div>
-      <ul class="footer__socials">
-        <li><a href="#" class="footer__social mono">Instagram</a></li>
-        <li><a href="#" class="footer__social mono">Twitter/X</a></li>
-        <li><a href="#" class="footer__social mono">Behance</a></li>
-        <li><a href="#" class="footer__social mono">GitHub</a></li>
-      </ul>
-    </div>
-  </footer>
-
-  <!-- CDN Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
-  <script src="dist/main.min.js"></script>
-
-</body>
+    </footer>
+  </body>
 </html>

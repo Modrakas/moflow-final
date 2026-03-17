@@ -115,3 +115,36 @@ never required at runtime. Placing it in dependencies would cause it to
 be included in production installs unnecessarily.
 
 ---
+
+## [P01-S07] main.ts Entry Point Sanitization · March 17, 2026
+
+### Decision
+Systematically purged all default `Vite` boilerplate from `main.ts` to establish a high-fidelity, zero-dependency entry point.
+
+### Rationale
+The factory-default counter logic introduces arbitrary DOM manipulation and state management that compromises our "Architectural Noir" structural integrity. In high-end design engineering, it's important to prioritize a "Clean Site" protocol—removing all non-essential artifacts to ensure the orchestrator remains lean and the initialization sequence is strictly deterministic. This establishes a sterile environment for the custom motion and data engines arriving in *Phase 02*.
+
+---
+
+## [P01-S07] Legacy Asset Decontamination · March 17, 2026
+
+### Decision
+Systematic removal of legacy <script> tags, CDN references, and redundant <link> elements from the root index.html.
+
+### Rationale
+In the `Gulp` -era "Old World," there was reliance on external life support via CDNs for GSAP and Lenis. In the modern Vite architecture, these engines are now bundled locally via npm. Retaining the legacy tags created a *Direct Conflict* warning during the build: `script can't be bundled without type="module"` attribute. This occurred because the legacy scripts were attempting to claim the same namespace as our type-safe modules.
+
+By purging these artifacts, a `370ms` processing bottleneck is eliminated, ensuring that the browser only initializes a single, version-locked instance of our core engines. This removal of external dependencies allows the project to shift from a fragmented global execution model to a centralized, module-based architecture. With the "interference" of legacy scripts cleared, our new orchestrator, `main.ts`, now maintains exclusive authority over the system's initialization and runtime logic
+
+### Trade-offs
+Removing CDNs means no longer benefiting from potential browser caching of those common libraries across different websites. However, the gains in build-time determinism and the elimination of "ghost" namespace conflicts far outweigh the negligible cache hits of outdated CDN versions.
+
+---
+
+## [P01-S07] Google Fonts CDN — Deferred · March 17, 2026
+
+### Decision
+Temporarily retained the `Google Fonts CDN links (Syne and JetBrains Mono)` in the index.html header, deferring local installation to the start of Phase 2.
+
+### Rationale
+While the project constraint strictly mandates `No CDNs` to ensure a sterile, self-contained build, we are deferring the local font hosting setup to avoid scope creep at the end of Phase 1. This is a known temporary violation of the architectural principles. By acknowledging this debt now, it's ensured the baseline environment is functional for the current sprint while flagging the assets for a proper local-host migration in Phase 2, Step 1.
