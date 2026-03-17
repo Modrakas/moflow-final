@@ -1,0 +1,87 @@
+[
+  {
+    "id": "01",
+    "slug": "velocity-type-engine",
+    "tag": "Motion / Web",
+    "title": "EXP-01 — Velocity",
+    "titleLine2": "Type Engine",
+    "objective": "Reconstruct physics-driven kinetic typography using only Vanilla JS + GSAP. Variable font axes mapped to scroll velocity. No canvas. No libraries. Target: 60fps on mid-range hardware.",
+    "stack": [
+      "Vanilla JS",
+      "GSAP",
+      "Variable Fonts",
+      "ScrollTrigger"
+    ],
+    "color": "#FF7043",
+    "gradient": "linear-gradient(135deg, #2C0E0E 0%, #73321e 50%, #FF7043 100%)",
+    "url": "#"
+  },
+  {
+    "id": "02",
+    "slug": "null-space-protocol",
+    "tag": "3D / Immersive",
+    "title": "EXP-02 — Null",
+    "titleLine2": "Space Protocol",
+    "objective": "Build a raw WebGL void environment with zero abstraction layers — no Three.js, no shader libraries. Spatial audio piped directly to geometry uniforms. Constraint: sub-20ms per frame, cold-start load under 1s.",
+    "stack": [
+      "Raw WebGL",
+      "GLSL Shaders",
+      "Web Audio API",
+      "Vanilla JS"
+    ],
+    "color": "#D4E157",
+    "gradient": "linear-gradient(135deg, #2C0E0E 0%, #5f6527 50%, #D4E157 100%)",
+    "url": "#"
+  },
+  {
+    "id": "03",
+    "slug": "fault-line-identity",
+    "tag": "Brand / Identity",
+    "title": "EXP-03 — Fault Line",
+    "titleLine2": "Identity System",
+    "objective": "Engineer a full design token architecture from scratch — animated SVG mark, systematic type scale, colour logic in raw CSS custom properties. Stress-tested: 12pt print to 48-sheet outdoor. No design system tools used.",
+    "stack": [
+      "CSS Custom Properties",
+      "Animated SVG",
+      "SCSS Tokens",
+      "Vanilla JS"
+    ],
+    "color": "#26C6DA",
+    "gradient": "linear-gradient(135deg, #2C0E0E 0%, #115962 50%, #26C6DA 100%)",
+    "url": "#"
+  },
+  {
+    "id": "04",
+    "slug": "axon-data-renderer",
+    "tag": "Interactive / Data",
+    "title": "EXP-04 — Axon",
+    "titleLine2": "Data Renderer",
+    "objective": "Render 40,000 live data nodes as a scrollable, animated force graph using direct WebGL draw calls. Constraint: zero charting libraries, full keyboard navigation, WCAG AA contrast at every zoom level.",
+    "stack": [
+      "Raw WebGL",
+      "Canvas API",
+      "Force Graph",
+      "Vanilla JS"
+    ],
+    "color": "#EC407A",
+    "gradient": "linear-gradient(135deg, #2C0E0E 0%, #6a1d37 50%, #EC407A 100%)",
+    "url": "#"
+  },
+  {
+    "id": "05",
+    "slug": "meridian-sequence",
+    "tag": "Film / Title Seq.",
+    "title": "EXP-05 — Meridian",
+    "titleLine2": "Sequence 001",
+    "objective": "Procedurally generate a film title sequence in-browser using a custom particle emitter — 3,200 emitters, frame-locked to 24fps via a deterministic RAF scheduler. Constraint: no After Effects, no video export, runs live in Chrome.",
+    "stack": [
+      "Canvas 2D API",
+      "Particle System",
+      "RAF Scheduler",
+      "Vanilla JS"
+    ],
+    "color": "#FFA726",
+    "gradient": "linear-gradient(135deg, #2C0E0E 0%, #734b11 50%, #FFA726 100%)",
+    "url": "#"
+  }
+]
