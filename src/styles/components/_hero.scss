@@ -1,0 +1,252 @@
+// ============================================================
+//  MoFlow Lab — components/_hero.scss
+//
+//  Layout architecture:
+//  .hero is a flex column with justify-content: space-between.
+//  ┌─────────────────────────────────┐
+//  │  .hero__content  (headlines)    │  ← flex-grow: 1, aligns to top
+//  ├─────────────────────────────────┤
+//  │  .hero__footer   (status bar)   │  ← pinned to bottom, flex row
+//  │   [status + counter] [scroll]   │
+//  └─────────────────────────────────┘
+//
+//  This mirrors the 62184 structure exactly.
+// ============================================================
+@use '../abstracts' as a;
+@use '../abstracts/mixins' as m;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(#{a.$nav-height} + #{a.$space-8}) a.$space-8 a.$space-8;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: calc(#{a.$nav-height} + #{a.$space-6}) a.$space-5 a.$space-6;
+  }
+
+  // ─── Background grid ────────────────────────────────────
+  &__grid-overlay {
+    @include a.absolute-fill;
+    // Ember-tinted grid: accent at 4% opacity blends into oxblood bg
+    @include a.bg-grid(80px, rgba(a.$color-accent, 0.04));
+    pointer-events: none;
+  }
+
+  // ─── Content block (eyebrow + headline + meta) ──────────
+  // flex-grow: 1 pushes .hero__footer to the very bottom.
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: a.$max-width;
+    width: 100%;
+    margin: 0 auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; // headline sits in lower two-thirds
+    padding-bottom: a.$space-8;
+  }
+
+  // ─── Eyebrow label ───────────────────────────────────────
+  &__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: a.$space-4;
+    margin-bottom: a.$space-6;
+    opacity: 0;              // GSAP animates to 1
+    transform: translateY(10px);
+  }
+
+  &__eyebrow-line {
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: a.$color-accent;
+    flex-shrink: 0;
+  }
+
+  &__eyebrow-text {
+    font-family: a.$font-mono;
+    font-size: a.$fs-l;     // ~12px — technical-label scale
+    font-weight: a.$fw-mono;
+    color: a.$color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: a.$ls-m;
+  }
+
+  // ─── Headline ────────────────────────────────────────────
+  // clamp(3rem, 12vw, 7.5rem):
+  //   3rem floor  → no mobile overflow
+  //   12vw fluid  → scales naturally between breakpoints
+  //   7.5rem cap  → controlled max; never bleeds off-screen
+  //
+  // line-height: 0.9 is intentionally tight — the 62184 version
+  // relied on this to create the stacked-headline density.
+  &__headline {
+    font-family: a.$font-sans;
+    font-weight: a.$fw-sans;
+    @include m.fluid-type(48px, 120px);
+    line-height: a.$lh-s;
+    letter-spacing: a.$ls-xxs;
+    margin-bottom: a.$space-8;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      margin-bottom: a.$space-6;
+    }
+  }
+
+  &__headline-line {
+    display: block;
+    overflow: hidden;         // clip for the GSAP translateY reveal
+
+		&:last-child {
+    padding-bottom: 0.15em; // descender room — 'g', 'y', 'p'
+    overflow: visible;       // let the descender breathe
+  }
+
+    &--indent {
+      @include m.fluid-space(padding-left, 2rem, 8rem); // proportional indent
+    }
+
+    &--wide {
+      letter-spacing: a.$ls-xs;
+    }
+  }
+
+  &__headline-em {
+    color: a.$color-accent;
+    font-style: italic;
+  }
+
+  &__headline-amp {
+    color: a.$color-text-muted;
+    margin-left: a.$space-3;
+  }
+
+  // ─── Meta / descriptor block ─────────────────────────────
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: a.$space-4;
+    opacity: 0;              // GSAP animates to 1
+    transform: translateY(20px);
+  }
+
+  &__descriptor {
+    font-family: a.$font-mono;
+    font-size: a.$fs-xl;    // ~13px — just above floor, clearly secondary
+    font-weight: a.$fw-mono;
+    color: a.$color-text-muted;
+    line-height: a.$lh-l;
+    max-width: 520px;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: a.$space-3;
+  }
+
+  &__status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: a.$color-accent;
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  &__status-text {
+    font-family: a.$font-mono;
+    font-size: a.$fs-l;
+    font-weight: a.$fw-mono;
+    color: a.$color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: a.$ls-s;
+  }
+
+  // ─── Footer bar ──────────────────────────────────────────
+  // Flex row: left group (status label + counter) | right (scroll cue).
+  // max-width matches .hero__content so columns align.
+  &__footer {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: a.$max-width;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: a.$space-5;
+
+    @media (max-width: 768px) {
+      // On mobile, only the status label is shown; cue + counter hidden
+      justify-content: flex-start;
+    }
+  }
+
+  // ─── Footer left: status label + counter ────────────────
+  &__footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: a.$space-3;
+    opacity: 0;             // GSAP animates to 1
+  }
+
+  &__footer-label {
+    font-family: a.$font-mono;
+    font-size: a.$fs-l;
+    font-weight: a.$fw-mono;
+    color: a.$color-text-dim;
+    text-transform: uppercase;
+    letter-spacing: a.$ls-m;
+  }
+
+  &__counter {
+    font-family: a.$font-mono;
+    font-size: a.$fs-l;
+    font-weight: a.$fw-mono;
+    color: a.$color-text-dim;
+    letter-spacing: a.$ls-s;
+
+    @media (max-width: 768px) { display: none; }
+  }
+
+  &__counter-sep {
+    margin: 0 4px;
+    color: a.$color-accent;
+  }
+
+  // ─── Footer right: scroll cue ───────────────────────────
+  &__scroll-cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: a.$space-3;
+    opacity: 0;            // GSAP animates to 1
+
+    @media (max-width: 768px) { display: none; }
+
+    span {
+      font-family: a.$font-mono;
+      font-size: a.$fs-m; // ~11px — smallest readable mono size
+      font-weight: a.$fw-mono;
+      color: a.$color-text-dim;
+      text-transform: uppercase;
+      letter-spacing: a.$ls-l;
+      writing-mode: vertical-rl;
+    }
+  }
+
+  &__scroll-line {
+    width: 1px;
+    height: 64px;
+    background: a.$color-border-hover;
+    animation: scrollLine 2s ease-in-out infinite;
+	}
+}

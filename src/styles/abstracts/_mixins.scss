@@ -58,3 +58,20 @@
   background-size: $size $size;
   background-attachment: fixed;
 }
+
+// ─── Fluid spacing ──────────────────────────────────────────
+// Scales any spacing property linearly between two viewport widths.
+// Usage: @include fluid-space(padding-left, 2rem, 8rem);
+@mixin fluid-space($property, $min-size, $max-size, $min-vw: 375px, $max-vw: 1440px) {
+  $min-s: math.div($min-size, $min-size * 0 + 1);
+  $max-s: math.div($max-size, $max-size * 0 + 1);
+  $min-w: math.div($min-vw,   $min-vw   * 0 + 1);
+  $max-w: math.div($max-vw,   $max-vw   * 0 + 1);
+  $slope:     math.div($max-s - $min-s, $max-w - $min-w);
+  $intercept: $min-s - $slope * $min-w;
+  #{$property}: clamp(
+    #{$min-size},
+    calc(#{$slope} * 100vw + #{$intercept}px),
+    #{$max-size}
+  );
+}

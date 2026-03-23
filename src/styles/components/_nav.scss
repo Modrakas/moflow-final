@@ -1,0 +1,90 @@
+// 	MoFlow Lab — components/_nav.scss
+//  Fixed header + nav bar
+// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+@use '../abstracts' as a;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: a.$z-nav;
+  height: a.$nav-height;
+  padding: 0 a.$space-7;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s ease, background 0.4s ease;
+
+  // Toggled by ScrollAnimations._headerScroll() via ScrollTrigger
+  &.is-scrolled {
+    border-color: a.$color-border;
+    background: rgba(a.$color-bg, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: a.$max-width;
+  margin: 0 auto;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: a.$space-3;
+    font-family: a.$font-sans;
+    font-weight: 800;
+    @include a.fluid-type(18px, 22px);
+    letter-spacing: -0.02em;
+  }
+
+  &__logo-mark {
+    color: a.$color-accent;
+    font-size: 1.2em;
+    animation: spin 12s linear infinite;
+    display: inline-block;
+  }
+
+  &__logo-accent { color: a.$color-accent; }
+
+  &__links {
+    display: flex;
+    gap: a.$space-7;
+
+    @media (max-width: 768px) { display: none; }
+  }
+
+  &__link {
+    @include a.mono;
+    font-size: a.$fs-xl;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: a.$color-text-muted;
+    position: relative;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: a.$color-accent;
+      transition: width 0.4s a.$ease-out-expo;
+    }
+
+    &:hover {
+      color: a.$color-text;
+      &::after { width: 100%; }
+    }
+  }
+
+  &__cta {
+    @media (max-width: 768px) { display: none; }
+  }
+}
