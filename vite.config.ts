@@ -2,32 +2,37 @@ import { defineConfig, createLogger } from 'vite';
 import path from 'path';
 
 const customLogger = createLogger();
-const projectRoot = process.cwd(); // This gets your folder path
+const projectRoot = process.cwd();
+const displayRoot = 'modrak/MoFlow Lab';
 
-// Intercept error messages
+// Clean terminal output
 const loggerError = customLogger.error;
 customLogger.error = (msg, options) => {
-  // Replace your full computer path with the "Lab" name
-  const cleanMsg = msg.replace(new RegExp(projectRoot, 'g'), 'modrak/MoFlow Lab');
+  const cleanMsg = msg.replace(new RegExp(projectRoot, 'g'), displayRoot);
   loggerError(cleanMsg, options);
 };
+
+const loggerWarn = customLogger.warn;
+customLogger.warn = (msg, options) => {
+  const cleanMsg = msg.replace(new RegExp(projectRoot, 'g'), displayRoot);
+  loggerWarn(cleanMsg, options);
+};
+
 export default defineConfig({
   customLogger: customLogger,
   root: './',
   resolve: {
     alias: {
-      '@':       path.resolve(__dirname, './src'),
-      '@styles': path.resolve(__dirname, './src/styles'),
+      '@':        path.resolve(__dirname, './src'),
+      '@styles':  path.resolve(__dirname, './src/styles'),
       '@modules': path.resolve(__dirname, './src/modules'),
-      '@data':   path.resolve(__dirname, './src/data'),
+      '@data':    path.resolve(__dirname, './src/data'),
     },
   },
-  
   css: {
+    devSourcemap: false,
     preprocessorOptions: {
       scss: {
-        // Makes abstracts globally available in every .scss file
-        // without needing to @use them manually each time
         additionalData: `@use "@styles/abstracts" as *;`,
       },
     },
@@ -41,4 +46,24 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
+  plugins: [
+    {
+      name: 'clean-error-overlay',
+      // Intercepts the error before Vite sends it to the browser overlay
+      transformIndexHtml(html) {
+        return html;
+      },
+      configureServer(server) {
+        server.ws.on('connection', (socket) => {
+          const originalSend = socket.send.bind(socket);
+          socket.send = (data) => {
+            if (typeof data === 'string') {
+              data = data.replace(new RegExp(projectRoot.replace(/\//g, '\\/'), 'g'), displayRoot);
+            }
+            return originalSend(data);
+          };
+        });
+      },
+    },
+  ],
 });
