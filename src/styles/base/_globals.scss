@@ -1,0 +1,35 @@
+// 	MoFlow Lab — base/_globals.scss
+//  Scrollbar styling, text selection
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+@use '../abstracts' as a;
+
+// ─── Scrollbar ───────────────────────────────────────────────
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: a.$color-bg; }
+::-webkit-scrollbar-thumb {
+  background: a.$color-border-hover;
+  &:hover { background: a.$color-accent; }
+}
+
+// ─── Selection ───────────────────────────────────────────────
+::selection {
+  background: a.$color-accent;
+  color:      a.$color-bg;
+}
+
+// ─── Document base ───────────────────────────────────────────–––
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: a.$font-sans;
+  background-color: a.$color-bg;
+  color: a.$color-text;
+  overflow-x: hidden;
+  line-height: 1.6;
+
+  @include a.bg-grid(56px, rgba(255, 255, 255, 0.02));
+}

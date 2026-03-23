@@ -1,0 +1,67 @@
+// 	MoFlow Lab — base/_animations.scss
+//  Global keyframes + GSAP scroll-animation initial states
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// ─── Keyframes ───────────────────────────────────────────────
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%       { opacity: 0.5; transform: scale(0.7); }
+}
+
+@keyframes scrollLine {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0,    0);   }
+  10%       { transform: translate(-5%,  -5%); }
+  20%       { transform: translate(10%,   5%); }
+  30%       { transform: translate(-3%,   8%); }
+  40%       { transform: translate(8%,   -3%); }
+  50%       { transform: translate(-7%,   6%); }
+  60%       { transform: translate(5%,   -8%); }
+  70%       { transform: translate(-9%,   2%); }
+  80%       { transform: translate(3%,    9%); }
+  90%       { transform: translate(-1%,  -6%); }
+}
+
+// ─── GSAP initial hidden states ──────────────────────────────
+// Elements start invisible/translated; GSAP animates them in on scroll.
+
+.work__header-title,
+.work__header-label,
+.about__title,
+.about__label,
+.about__body,
+.about__stats,
+.capabilities,
+.contact__label,
+.contact__headline,
+.contact__cta {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.project {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.capability {
+  opacity: 0;
+  transform: translateY(20px);
+}
