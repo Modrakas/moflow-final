@@ -1,60 +1,147 @@
-//  MoFlow Lab — abstracts/_mixins.scss
-//  Reusable mixins: fluid-type, layout helpers, bg-grid
-// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-@use 'sass:math';
-@use 'variables' as v;
+// MoFlow Lab — base/_typography.scss
+//
+//  Type system: two-tier contrast
+//
+//  DISPLAY tier — Syne ExtraBold (800)
+//    Hero headline, section titles, project titles
+//    Scale: clamp-based, large
+//
+//  SYSTEM tier — JetBrains Mono Light (300)
+//    All metadata, labels, badge text, marquee, nav links
+//    Scale: 0.625rem–0.85rem — deliberately small for contrast
+//
+//  This two-tier system is the core of the R&D Index aesthetic:
+//  the collision between massive Syne numerals and tiny mono
+//  labels creates the high-end "technical editorial" read.
+// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-// ─── Fluid typography ───────────────────────────────────────
-// Scales font-size linearly between two viewport widths using clamp().
-// Uses math.div to strip units before arithmetic, preventing px/px issues.
-@mixin fluid-type($min-size, $max-size, $min-vw: 375px, $max-vw: 1440px) {
-  $min-s: math.div($min-size, $min-size * 0 + 1);
-  $max-s: math.div($max-size, $max-size * 0 + 1);
-  $min-w: math.div($min-vw,   $min-vw   * 0 + 1);
-  $max-w: math.div($max-vw,   $max-vw   * 0 + 1);
-  $slope:     math.div($max-s - $min-s, $max-w - $min-w);
-  $intercept: $min-s - $slope * $min-w;
-  font-size: clamp(
-    #{$min-size},
-    calc(#{$slope} * 100vw + #{$intercept}px),
-    #{$max-size}
-  );
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+@font-face {
+  font-family: 'Syne ExtraBold';
+  src: url('/fonts/Syne-ExtraBold.woff2') format('woff2');
 }
 
-// ─── Monospace utility ──────────────────────────────────────
-@mixin mono {
-  font-family: v.$font-mono;
-  font-weight: 300;
-  letter-spacing: 0.05em;
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Light.woff2') format('woff2');
 }
 
-// ─── Layout helpers ─────────────────────────────────────────
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+html {
+  @include m.fluid-type(16px, 20px);
+  -webkit-text-size-adjust: 100%;
 }
 
-@mixin absolute-fill {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+body {
+  font-family: v.$font-sans;
 }
 
-@mixin section-pad {
-  padding: v.$space-11 v.$space-8;
-
-  @media (max-width: 768px) {
-    padding: v.$space-9 v.$space-5;
-  }
+h1, h2, h3, h4 {
+  font-family: v.$font-sans;
+  line-height: v.$lh-s;
+  letter-spacing: v.$ls-xxs;
 }
 
-// ─── Background grid ────────────────────────────────────────
-@mixin bg-grid($size: 48px, $color: rgba(255, 255, 255, 0.03)) {
-  background-image:
-    repeating-linear-gradient(0deg,  transparent, transparent calc(#{$size} - 1px), #{$color} #{$size}),
-    repeating-linear-gradient(90deg, transparent, transparent calc(#{$size} - 1px), #{$color} #{$size});
-  background-size: $size $size;
-  background-attachment: fixed;
+// ─── Monospace utility class ─────────────────────────────────
+// .mono is the HTML hook — set on any element that needs
+// JetBrains Mono. The mixin applies font-family, weight, and
+// letter-spacing in one declaration.
+
+.mono {
+  @include m.mono;
 }
+
+// ─── Display tier — Syne ExtraBold ──────────────────────────
+// All large structural text. Rules declared here are the source
+// of truth; _hero.scss and _work.scss reinforce them locally.
+
+.hero__headline,
+.work__header-title,
+.about__title,
+.contact__headline,
+.project__title {
+  font-family: v.$font-sans;
+}
+
+// ─── System tier — JetBrains Mono ───────────────────────────
+// Font sizes are intentionally small (0.625rem–0.85rem).
+// The small size is not a compromise — it is the design.
+// Tiny mono against massive Syne is what produces the contrast.
+
+// Hero metadata
+.hero__eyebrow-text,
+.hero__descriptor,
+.hero__status-text,
+.hero__footer-label,
+.hero__counter {
+  @include m.mono;
+}
+
+.hero__eyebrow-text { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-m; text-transform: uppercase; }
+.hero__descriptor   { @include m.fluid-type(12px, 16px); line-height: v.$lh-l; }
+.hero__status-text  { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-s;  text-transform: uppercase; }
+.hero__footer-label { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-m; text-transform: uppercase; }
+.hero__counter      { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-m; }
+
+// Nav
+.nav__link {
+  @include m.mono;
+  @include m.fluid-type(12px, 14px);
+  text-transform: uppercase;
+  letter-spacing: v.$ls-m;
+}
+
+// Work section labels
+.work__header-label,
+.work__status-label {
+  @include m.mono;
+}
+
+.work__header-label { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-l; text-transform: uppercase; }
+.work__status-label { @include m.fluid-type(9px, 11px); }
+
+// Project metadata
+.project__index,
+.project__tag,
+.project__stack-badge,
+.project__link {
+  @include m.mono;
+}
+
+.project__index       { @include m.fluid-type(9px, 11px);  letter-spacing: v.$ls-m; }
+.project__tag         { @include m.fluid-type(8px, 10px);  letter-spacing: v.$ls-m; text-transform: uppercase; }
+.project__stack-badge { @include m.fluid-type(7px, 9px);   letter-spacing: v.$ls-m; text-transform: uppercase; }
+.project__link        { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-m; text-transform: uppercase; }
+
+// Marquee — system text, continuous technical ticker
+.marquee__group {
+  @include m.mono;
+  @include m.fluid-type(10px, 12px); // small enough to feel like a status bar
+  text-transform: uppercase;
+  letter-spacing: v.$ls-l;
+}
+
+// About labels
+.about__label,
+.about__stat-label,
+.capabilities__header,
+.capability__num {
+  @include m.mono;
+}
+
+.about__label         { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-m; text-transform: uppercase; }
+.about__stat-label    { @include m.fluid-type(9px, 11px);  letter-spacing: v.$ls-m; text-transform: uppercase; }
+.capabilities__header { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-m; text-transform: uppercase; }
+.capability__num      { @include m.fluid-type(9px, 11px);  letter-spacing: v.$ls-m; }
+
+// Contact + Footer
+.contact__label,
+.footer__copy,
+.footer__social {
+  @include m.mono;
+}
+
+.contact__label { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-m;  text-transform: uppercase; }
+.footer__copy   { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-xs; }
+.footer__social { @include m.fluid-type(10px, 12px); letter-spacing: v.$ls-m;  text-transform: uppercase; }

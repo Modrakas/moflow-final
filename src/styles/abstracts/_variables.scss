@@ -51,6 +51,25 @@ $space-12:  256px;
 $font-sans: 'Syne', sans-serif;
 $font-mono: 'JetBrains Mono', monospace;
 
+$fw-sans: 	800;
+$fw-mono: 	300;
+
+$fs-xxl: 		1rem;
+$fs-xl: 		0.8125rem;
+$fs-l: 			0.75rem;
+$fs-m: 			0.6875rem;
+$fs-s: 			0.625rem;
+$fs-xs: 		0.5625rem;
+
+$lh-s: 			0.95;		
+$lh-l: 			1.75;   
+
+$ls-xxs: 		-0.03em;
+$ls-xs: 		0.05em;
+$ls-s: 			0.1em;
+$ls-m: 			0.12em;
+$ls-l: 			0.14em;
+
 // ─── Layout ─────────────────────────────────────────────────
 $grid-cols:  12;
 $max-width:  1440px;
@@ -147,4 +166,26 @@ $copy-footer-tagline:    'R&D v1.0 — Experiments ongoing.';
 --color-signal-03:    #26C6DA;   // Steel Teal    — EXP-03
 --color-signal-04:    #EC407A;   // Electric Rose — EXP-04
 --color-signal-05:    #FFA726;   // Amber Gold    — EXP-05
+
+--font-sans: 'Syne', sans-serif;
+--font-mono: 'JetBrains Mono', monospace;
+
+--fw-sans: 		800;
+--fw-mono: 		300;
+
+--fs-xxl: 		1rem;
+--fs-xl: 			0.8125rem;
+--fs-l: 			0.75rem;
+--fs-m: 			0.6875rem;
+--fs-s: 			0.625rem;
+--fs-xs: 			0.5625rem;
+
+--lh-s: 			0.95;		
+--lh-l: 			1.75;   
+
+--ls-xxs: 		-0.03em;
+--ls-xs: 			.05em;
+--ls-s: 			0.1em;
+--ls-m: 			0.12em;
+--ls-l: 			0.14em;
 }

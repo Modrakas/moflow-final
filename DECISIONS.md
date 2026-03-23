@@ -195,6 +195,8 @@ Implemented `fnm` (Fast Node Manager) to upgrade the Node.js runtime from `22.11
 ### Rationale
 Vite 8 requires Node.js `22.12+` as a minimum. The environment was running `22.11.0`, creating a version mismatch that blocked compatibility with the latest build engine features. `fnm` was chosen as the version manager to enforce this constraint going forward.
 
+---
+
 ## [P02-S02] CSS Custom Properties Convention · March 23, 2026
 
 ### Decision
@@ -206,3 +208,38 @@ Introduced CSS custom properties alongside existing SCSS variables, mirroring th
 **Mirrored Naming Convention:** The `--color-*` / `$color-*` parallel is intentional. A single source of truth is maintained at the SCSS level, with custom properties acting as the runtime projection of that same system. The mirrored names make the relationship explicit and elimination ambiguity when switching contest between build-time and runtime logic.
 
 **`:root` Block Placement:** The `:root` block lives in the `_variables.scss` (imported at the top of the main entry partial). Centralizing all custom property declarations here ensures they are globally scoped, declared before any consuming rules, and easy to audit as the single authoritative token surface of the design system.
+
+---
+
+## [P02-S03] Typography Token Map · March 23, 2026
+
+### Decision
+Defined a structured typography token map in SCSS, covering font families, weights, sizes, line heights, and letter spacing, consumed by `_typography.scss` to generate both SCSS variables and CSS custom properties.
+
+### Rationale
+
+**Token Map vs. Flat Variables:** Grouping typography values into a structured Sass map rather than a flat list of individual variables enforces a deliberate system boundary. The map makes the full scope of the typography system visible in one place, prevents ad-hoc additions, and allows programmatic iteration via `@each` to generate custom properties without repetitive declarations.
+
+**Coverage:** The token map covers the full typographic axis — `font-family`, `font-weight`, `font-size`, `line-height`, and `letter-spacing` — ensuring that no value in the system is hardcoded outside the map. Any future addition to the type scale requires a single edit at the token level, propagating automatically through all generated output.
+
+**Consumption Pattern:** `_typography.scss` is the sole consumer of the map. It iterates the map to emit both the SCSS variable bindings and the corresponding `--type-*` CSS custom properties, maintaining the same build-time / runtime duality established in `[P02-S02]`.
+
+---
+
+## [P02-S03] Typography Mixin Integration · March 23, 2026
+
+### Decision
+Refactored `_typography.scss` to replace all inline `font-family`, `font-weight`, and `font-size` declarations with the `@include m.mono` and `@include m.fluid-type()` mixins defined in `_mixins.scss`.
+
+### Rationale
+
+**Eliminating Declaration Repetition:** Every system-tier element previously declared `font-family: v.$font-mono` and `font-weight: v.$fw-mono` individually. The `@include m.mono` mixin consolidates these into a single authoritative call, reducing the surface area for drift if the mono stack ever changes.
+
+**Fluid Type over Static Tokens:** Static `v.$fs-*` tokens produce fixed sizes that do not respond to viewport width. Replacing them with `@include m.fluid-type()` ranges means every typographic element now scales continuously between its minimum and maximum — preserving the deliberate size contrast between the Display and System tiers across all screen widths, not just at the design's base breakpoint.
+
+**Display Tier Consolidation:** The five separate `font-family: v.$font-sans` declarations were collapsed into a single grouped rule. The behavior is identical; the grouped form makes the Display tier's scope explicit and easier to audit.
+
+**Single Source of Change:** With mixins as the intermediary, a future change to the mono stack or fluid scale parameters requires one edit in `_mixins.scss` — not a find-and-replace across every component partial that touches type.
+
+### Trade-offs
+The `fluid-type()` min/max px values are currently approximations mapped from the original `$fs-*` token names. These ranges should be validated against the actual rendered output and adjusted to match the intended scale before the component partials (`_hero.scss`, `_work.scss`, etc.) are audited.

@@ -22,17 +22,15 @@
 @font-face {
   font-family: 'Syne ExtraBold';
   src: url('/fonts/Syne-ExtraBold.woff2') format('woff2');
-  font-weight: 800;
 }
 
 @font-face {
   font-family: 'JetBrains Mono';
   src: url('/fonts/JetBrainsMono-Light.woff2') format('woff2');
-  font-weight: 300;
 }
 
 html {
-  font-size: 16px;
+  font-size: v.$fs-xxl;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -42,8 +40,8 @@ body {
 
 h1, h2, h3, h4 {
   font-family: v.$font-sans;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  line-height: v.$lh-s;
+  letter-spacing: v.$ls-xxs;
 }
 
 // ─── Monospace utility class ─────────────────────────────────
@@ -91,33 +89,33 @@ h1, h2, h3, h4 {
 .hero__footer-label,
 .hero__counter {
   font-family: v.$font-mono;
-  font-weight: 300;
+  font-weight: v.$fw-mono;
 }
 
-.hero__eyebrow-text { font-size: 0.75rem;   letter-spacing: 0.12em; text-transform: uppercase; }
-.hero__descriptor   { font-size: 0.8125rem; line-height: 1.75; }
-.hero__status-text  { font-size: 0.75rem;   letter-spacing: 0.1em;  text-transform: uppercase; }
-.hero__footer-label { font-size: 0.75rem;   letter-spacing: 0.12em; text-transform: uppercase; }
-.hero__counter      { font-size: 0.75rem;   letter-spacing: 0.1em; }
+.hero__eyebrow-text { font-size: v.$fs-l;   letter-spacing: v.$ls-m; text-transform: uppercase; }
+.hero__descriptor   { font-size: v.$fs-xl; line-height: v.$lh-l; }
+.hero__status-text  { font-size: v.$fs-l;   letter-spacing: v.$ls-s;  text-transform: uppercase; }
+.hero__footer-label { font-size: v.$fs-l;   letter-spacing: v.$ls-m; text-transform: uppercase; }
+.hero__counter      { font-size: v.$fs-l;   letter-spacing: v.$ls-m; }
 
 // Nav
 .nav__link {
   font-family: v.$font-mono;
-  font-weight: 300;
-  font-size: 0.8125rem;
+  font-weight: v.$fw-mono;
+  font-size: v.$fs-xl;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: v.$ls-m;
 }
 
 // Work section labels
 .work__header-label,
 .work__status-label {
   font-family: v.$font-mono;
-  font-weight: 300;
+  font-weight: v.$fw-mono;
 }
 
-.work__header-label { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
-.work__status-label { font-size: 0.6875rem; }
+.work__header-label { font-size: v.$fs-l; letter-spacing: v.$ls-l; text-transform: uppercase; }
+.work__status-label { font-size: v.$fs-m; }
 
 // Project metadata
 .project__index,
@@ -125,21 +123,21 @@ h1, h2, h3, h4 {
 .project__stack-badge,
 .project__link {
   font-family: v.$font-mono;
-  font-weight: 300;
+  font-weight: v.$fw-mono;
 }
 
-.project__index      { font-size: 0.6875rem; letter-spacing: 0.1em; }
-.project__tag        { font-size: 0.625rem;  letter-spacing: 0.1em; text-transform: uppercase; }
-.project__stack-badge{ font-size: 0.5625rem; letter-spacing: 0.1em; text-transform: uppercase; }
-.project__link       { font-size: 0.75rem;   letter-spacing: 0.1em; text-transform: uppercase; }
+.project__index      { font-size: v.$fs-m; letter-spacing: v.$ls-m; }
+.project__tag        { font-size: v.$fs-s;  letter-spacing: v.$ls-m; text-transform: uppercase; }
+.project__stack-badge{ font-size: v.$fs-xs; letter-spacing: v.$ls-m; text-transform: uppercase; }
+.project__link       { font-size: v.$fs-l;   letter-spacing: v.$ls-m; text-transform: uppercase; }
 
 // Marquee — system text, continuous technical ticker
 .marquee__group {
   font-family: v.$font-mono;
-  font-weight: 300;
-  font-size: 0.75rem;         // 12px — small enough to feel like a status bar
+  font-weight: v.$fw-mono;
+  font-size: v.$fs-l;         // 12px — small enough to feel like a status bar
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: v.$ls-l;
 }
 
 // About labels
@@ -148,23 +146,23 @@ h1, h2, h3, h4 {
 .capabilities__header,
 .capability__num {
   font-family: v.$font-mono;
-  font-weight: 300;
+  font-weight: v.$fw-mono;
 }
 
-.about__label       { font-size: 0.75rem;   letter-spacing: 0.12em; text-transform: uppercase; }
-.about__stat-label  { font-size: 0.6875rem; letter-spacing: 0.1em;  text-transform: uppercase; }
-.capabilities__header { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
-.capability__num    { font-size: 0.6875rem; letter-spacing: 0.1em; }
+.about__label       { font-size: v.$fs-l;   letter-spacing: v.$ls-m; text-transform: uppercase; }
+.about__stat-label  { font-size: v.$fs-m; letter-spacing: v.$ls-m;  text-transform: uppercase; }
+.capabilities__header { font-size: v.$fs-l; letter-spacing: v.$ls-m; text-transform: uppercase; }
+.capability__num    { font-size: v.$fs-m; letter-spacing: v.$ls-m; }
 
 // Contact + Footer
 .contact__label,
 .footer__copy,
 .footer__social {
   font-family: v.$font-mono;
-  font-weight: 300;
+  font-weight: v.$fw-mono;
 }
 
-.contact__label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
-.footer__copy   { font-size: 0.75rem; letter-spacing: 0.05em; }
-.footer__social { font-size: 0.75rem; letter-spacing: 0.1em;  text-transform: uppercase; }
+.contact__label { font-size: v.$fs-l; letter-spacing: v.$ls-m; text-transform: uppercase; }
+.footer__copy   { font-size: v.$fs-l; letter-spacing: v.$ls-xs; }
+.footer__social { font-size: v.$fs-l; letter-spacing: v.$ls-m;  text-transform: uppercase; }
 
