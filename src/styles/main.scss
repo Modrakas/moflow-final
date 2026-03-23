@@ -1,0 +1,29 @@
+/* src/styles/main.scss */
+// ============================================================
+//  MoFlow Lab — sass/index.scss
+//  Manifest file. Import order matters:
+//  abstracts → base → components
+//  Each layer uses @use, never @import.
+// ============================================================
+
+// ─── Abstracts (no CSS output — tokens & mixins only) ────────
+@use 'abstracts';   // forwards _variables + _mixins
+
+// ─── Base (global resets, type, animations) ──────────────────
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/animations';
+@use 'base/globals';
+
+// ─── Components ──────────────────────────────────────────────
+@use 'components/noise';
+@use 'components/cursor';
+@use 'components/nav';
+@use 'components/button';
+@use 'components/hero';
+@use 'components/marquee';
+@use 'components/work';
+@use 'components/about';
+@use 'components/contact';
+@use 'components/footer';
+@use 'components/project-reveal';

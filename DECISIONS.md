@@ -122,7 +122,7 @@ be included in production installs unnecessarily.
 Systematically purged all default `Vite` boilerplate from `main.ts` to establish a high-fidelity, zero-dependency entry point.
 
 ### Rationale
-The factory-default counter logic introduces arbitrary DOM manipulation and state management that compromises our "Architectural Noir" structural integrity. In high-end design engineering, it's important to prioritize a "Clean Site" protocol—removing all non-essential artifacts to ensure the orchestrator remains lean and the initialization sequence is strictly deterministic. This establishes a sterile environment for the custom motion and data engines arriving in *Phase 02*.
+The factory-default counter logic introduces arbitrary DOM manipulation and state management that compromises our "Architectural Noir" structural integrity. In high-end design engineering, it's important to prioritize a "Clean Site" protocol—removing all non-essential artifacts to ensure the orchestrator remains lean and the initialization sequence is strictly deterministic. This establishes a sterile environment for the custom motion and data engines arriving in **Phase 02**.
 
 ---
 
@@ -132,7 +132,7 @@ The factory-default counter logic introduces arbitrary DOM manipulation and stat
 Systematic removal of legacy <script> tags, CDN references, and redundant <link> elements from the root index.html.
 
 ### Rationale
-In the `Gulp` -era "Old World," there was reliance on external life support via CDNs for GSAP and Lenis. In the modern Vite architecture, these engines are now bundled locally via npm. Retaining the legacy tags created a *Direct Conflict* warning during the build: `script can't be bundled without type="module"` attribute. This occurred because the legacy scripts were attempting to claim the same namespace as our type-safe modules.
+In the `Gulp` -era "Old World," there was reliance on external life support via CDNs for GSAP and Lenis. In the modern Vite architecture, these engines are now bundled locally via npm. Retaining the legacy tags created a **Direct Conflict** warning during the build: `script can't be bundled without type="module"` attribute. This occurred because the legacy scripts were attempting to claim the same namespace as our type-safe modules.
 
 By purging these artifacts, a `370ms` processing bottleneck is eliminated, ensuring that the browser only initializes a single, version-locked instance of our core engines. This removal of external dependencies allows the project to shift from a fragmented global execution model to a centralized, module-based architecture. With the "interference" of legacy scripts cleared, our new orchestrator, `main.ts`, now maintains exclusive authority over the system's initialization and runtime logic
 
@@ -148,3 +148,49 @@ Temporarily retained the `Google Fonts CDN links (Syne and JetBrains Mono)` in t
 
 ### Rationale
 While the project constraint strictly mandates `No CDNs` to ensure a sterile, self-contained build, we are deferring the local font hosting setup to avoid scope creep at the end of Phase 1. This is a known temporary violation of the architectural principles. By acknowledging this debt now, it's ensured the baseline environment is functional for the current sprint while flagging the assets for a proper local-host migration in Phase 2, Step 1.
+
+## [P02-S01] Local Font Integration · March 17, 2026
+
+### Decision
+Resolved the temporary CDN violation from [P01-S07] by migrating Syne and JetBrains Mono to local hosting.
+
+### Rationale
+Serving fonts locally eliminates the 200-400ms overhead of establishing a connection to Google’s servers. It also aligns with our "Self-Sustaining" protocol—the application is now fully independent of third-party design providers, ensuring architectural stability and privacy.
+
+## [P02-S01a] Static Font Weight Selection · March 23, 2026
+
+### Decision
+Opted for static font weights (300, 800) over variable font files.
+
+### Rationale
+Static weights minimize initial payload size and ensure pixel-perfect consistency across legacy browsers. Variable fonts, while flexible, introduce unnecessary overhead for a constrained weight set.
+
+---
+
+## [P02-S01b] Font Asset Architecture · March 23, 2026
+
+### Decision
+Defined `@font-face` rules within `_typography.scss` and stored assets in `/fonts/` (aliased) rather than `/public/fonts/`, enforcing `format('woff2')` as the exclusive format standard.
+
+### Rationale
+Scoping `@font-face` declarations to `_typography.scss` maintains a clean Sass partial hierarchy rather than cluttering the global reset. Storing assets in `/fonts/` allows Vite's build pipeline to hash the files, preventing stale cache issues. Enforcing `format('woff2')` exclusively leverages maximum compression without the overhead of redundant legacy formats.
+
+---
+
+## [P02-S01c] Script Module Execution · March 23, 2026
+
+### Decision
+Applied `type="module"` to the primary script tag.
+
+### Rationale
+Vite 8 treats the entire dependency graph as ES Modules by default. Without this attribute, the browser fails to resolve the imports required for the font-loading logic, causing a silent initialization failure.
+
+---
+
+## [P02-S01d] Node.js Runtime Upgrade · March 23, 2026
+
+### Decision
+Implemented `fnm` (Fast Node Manager) to upgrade the Node.js runtime from `22.11.0` to `22.12+`.
+
+### Rationale
+Vite 8 requires Node.js `22.12+` as a minimum. The environment was running `22.11.0`, creating a version mismatch that blocked compatibility with the latest build engine features. `fnm` was chosen as the version manager to enforce this constraint going forward.

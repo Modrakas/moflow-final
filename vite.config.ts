@@ -1,7 +1,18 @@
-import { defineConfig } from 'vite';
+import { defineConfig, createLogger } from 'vite';
 import path from 'path';
 
+const customLogger = createLogger();
+const projectRoot = process.cwd(); // This gets your folder path
+
+// Intercept error messages
+const loggerError = customLogger.error;
+customLogger.error = (msg, options) => {
+  // Replace your full computer path with the "Lab" name
+  const cleanMsg = msg.replace(new RegExp(projectRoot, 'g'), 'modrak/MoFlow Lab');
+  loggerError(cleanMsg, options);
+};
 export default defineConfig({
+  customLogger: customLogger,
   root: './',
   resolve: {
     alias: {
@@ -11,6 +22,7 @@ export default defineConfig({
       '@data':   path.resolve(__dirname, './src/data'),
     },
   },
+  
   css: {
     preprocessorOptions: {
       scss: {

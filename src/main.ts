@@ -11,4 +11,4 @@
 // Phase 01: Foundation Baseline
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-
 
-console.log('MOFLOW LAB — R&D INDEX [v1.0.0]');
+import '@styles/main.scss';
