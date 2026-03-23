@@ -243,3 +243,20 @@ Refactored `_typography.scss` to replace all inline `font-family`, `font-weight`
 
 ### Trade-offs
 The `fluid-type()` min/max px values are currently approximations mapped from the original `$fs-*` token names. These ranges should be validated against the actual rendered output and adjusted to match the intended scale before the component partials (`_hero.scss`, `_work.scss`, etc.) are audited.
+
+---
+
+## [P02-S04] Spacing, Motion & Z-Index Token Maps · March 23, 2026
+
+### Decision
+Defined three structured token maps in `_variables.scss`: a spacing scale with semantic aliases, a motion scale covering duration and easing, and a z-index scale covering all stacking contexts.
+
+### Rationale
+
+**Spacing Scale & Semantic Aliases:** A raw numeric scale (`$space-1` through `$space-12`) provides the base increments. Semantic aliases map intent onto values — `$space-section-gap`, `$space-component-pad`, `$space-element-gap`, `$space-page-margin`, and `$space-inline-gap` — so call sites declare *what* they are spacing, not *how much*. This decouples layout decisions from raw numbers and makes future scale adjustments a single-variable change.
+
+**Motion Tokens:** Duration and easing values hardcoded across GSAP calls and CSS transitions create drift over time — the same interaction ends up with subtly different timing depending on where it was written. Centralizing these as `$duration-*` and `$ease-*` tokens ensures all motion in the system shares a common rhythm and can be tuned globally.
+
+**Z-Index Scale:** Stacking context bugs are almost always caused by undocumented magic numbers competing across files. A named z-index scale — `$z-base`, `$z-marquee`, `$z-nav`, `$z-cursor`, `$z-overlay` — makes the intended stacking order explicit and auditable in one place.
+
+**Variables, Not Mixins:** These are value tokens, not logic. Wrapping them in mixins would add indirection with no benefit. The one exception — `section-pad` — already exists as a mixin precisely because it bundles two axes and a breakpoint override, which is logic worth abstracting.

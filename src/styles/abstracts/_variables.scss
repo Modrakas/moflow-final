@@ -167,12 +167,30 @@ $copy-footer-tagline:    'R&D v1.0 — Experiments ongoing.';
 --color-signal-04:    #EC407A;   // Electric Rose — EXP-04
 --color-signal-05:    #FFA726;   // Amber Gold    — EXP-05
 
+// ─── Spacing scale (8pt base) ───────────────────────────────
+--space-1:   4px;
+--space-2:   8px;
+--space-3:   12px;
+--space-4:   16px;
+--space-5:   24px;
+--space-6:   32px;
+--space-7:   48px;
+--space-8:   64px;
+--space-9:   96px;
+--space-10:  128px;
+--space-11:  192px;
+--space-12:  256px;
+
+// ─── Typography ─────────────────────────────────────────────
+// font-family
 --font-sans: 'Syne', sans-serif;
 --font-mono: 'JetBrains Mono', monospace;
 
+// font-weight
 --fw-sans: 		800;
 --fw-mono: 		300;
 
+// font-size
 --fs-xxl: 		1rem;
 --fs-xl: 			0.8125rem;
 --fs-l: 			0.75rem;
@@ -180,12 +198,26 @@ $copy-footer-tagline:    'R&D v1.0 — Experiments ongoing.';
 --fs-s: 			0.625rem;
 --fs-xs: 			0.5625rem;
 
+// ─── Line Height & Letter Sapcing ─────────────────────────────────────────────
+// line ehight
 --lh-s: 			0.95;		
 --lh-l: 			1.75;   
 
+// letter spacing
 --ls-xxs: 		-0.03em;
 --ls-xs: 			.05em;
 --ls-s: 			0.1em;
 --ls-m: 			0.12em;
 --ls-l: 			0.14em;
+
+// ─── Z-index scale ──────────────────────────────────────────
+--z-noise:  1;
+--z-base:   10;
+--z-nav:    100;
+--z-cursor: 1000;
+
+// ─── Easing curves ──────────────────────────────────────────
+--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+--ease-in-expo:  cubic-bezier(0.7, 0, 0.84, 0);
+--ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
