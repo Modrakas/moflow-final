@@ -10,25 +10,25 @@
 
 MoFlow Lab is not a portfolio. It is an R&D archive. Every visual decision is a functional one — the palette, type hierarchy, and texture are designed to read like a living process monitor, not a designed website.
 
-| Property     | Value                                      |
-|--------------|--------------------------------------------|
-| Vibe         | Architectural Noir — Brutalist Precision   |
-| Palette      | Deep Madder · Burnt Orange · Parchment     |
-| Typography   | Syne ExtraBold (9:1) + JetBrains Mono      |
-| Motion       | GSAP + ScrollTrigger + Lenis               |
-| Philosophy   | Stress-Test — no CDNs, no frameworks       |
+| Property | Value                                      
+|–––|–––|
+| Vibe | Architectural Noir — Brutalist Precision   
+| Palette | Deep Madder · Burnt Orange · Parchment     
+| Typography | Syne ExtraBold (9:1) + JetBrains Mono      
+| Motion | GSAP + ScrollTrigger + Lenis               
+| Philosophy | Stress-Test — no CDNs, no frameworks       
 
 ---
 
 ## Stack
 
-| Tool          | Version   | Role                        |
-|---------------|-----------|-----------------------------|
-| Vite          | ^8.0.0    | Build tool & dev server     |
-| TypeScript    | ~5.9.3    | Type-safe logic layer       |
-| SCSS (7-1)    | ^1.98.0   | Architecture-grade styling  |
-| GSAP          | ^3.14.2   | Motion & ScrollTrigger      |
-| Lenis         | ^1.3.18   | Smooth scroll engine        |
+| Tool | Version | Role                        
+|–––|–––|–––|
+| Vite          | ^8.0.0    | Build tool & dev server     
+| TypeScript    | ~5.9.3    | Type-safe logic layer       
+| SCSS (7-1)    | ^1.98.0   | Architecture-grade styling  
+| GSAP          | ^3.14.2   | Motion & ScrollTrigger      
+| Lenis         | ^1.3.18   | Smooth scroll engine        
 
 ---
 
@@ -65,43 +65,33 @@ npm run preview   # Preview production build
 This project was migrated from a Vanilla JS + Gulp + Webpack build.
 See `DECISIONS.md` for the full audit trail of every architectural change.
 
-| Previous Stack      | Replacement         | Reason                        |
-|---------------------|---------------------|-------------------------------|
-| Gulp + Webpack      | Vite                | Single tool, faster HMR       |
-| Babel               | Vite / esbuild      | Native ESNext — no transpile  |
-| CDN GSAP            | npm gsap            | Tree-shaking, version lock    |
-| CDN Lenis           | npm lenis           | Same + removes LenisLite.js   |
-| LenisLite.js        | Retired             | Superseded by npm lenis       |
-| Vanilla JS          | TypeScript strict   | Catches bugs at compile time  |
+| Previous Stack | Replacement | Reason |
+|–––|–––|–––|
+| Gulp + Webpack | Vite | Single tool, faster HMR |
+| Babel | Vite / esbuild | Native ESNext — no transpile |
+| CDN GSAP | npm gsap | Tree-shaking, version lock |
+| CDN Lenis | npm lenis | Same + removes LenisLite.js |
+| LenisLite.js | Retired | Superseded by npm lenis |
+| Vanilla JS | TypeScript strict | Catches bugs at compile time |
 
 ---
 
 ## Phase Progress
 
 - [x] Phase 01 — Foundation: Environment & Identity
-- [ ] Phase 02 — DNA: Brand System & Design Tokens
+- [x] Phase 02 — DNA: Brand System & Design Tokens
 - [ ] Phase 03 — Instrumentation: Motion & Scroll Engine
 - [ ] Phase 04 — Artifacts: Index Architecture & Data Layer
 - [ ] Phase 05 — Deployment: Stress-Test & Ship
 
 ---
 
-## Capture Log
-
-| Phase | IG | YT | LI |
-|-------|----|----|-----|
-| 01 — Foundation | [ ] | [ ] | [ ] |
-| 02 — DNA | [ ] | [ ] | [ ] |
-| 03 — Instrumentation | [ ] | [ ] | [ ] |
-| 04 — Artifacts | [ ] | [ ] | [ ] |
-| 05 — Deployment | [ ] | [ ] | [ ] |
-
 ### The Palette — Ember & Earth
 
 The colour system is built around thermal contrast: deep madder backgrounds absorb light; burnt orange signals cut through it; parchment text sits high-contrast without the clinical coldness of pure white.
 
 | Token | Hex | Role |
-|---|---|---|
+|–––|–––|–––|
 | `$color-bg` | `#2C0E0E` | **Deep Madder** — page background. Warm-dark; absorbs aggressive typography without visual noise. |
 | `$color-bg-elevated` | `#3D1414` | Raised surface for hover states and cards. |
 | `$color-bg-surface` | `#4D1C1C` | Highest surface level — tooltips, active states. |
@@ -119,7 +109,7 @@ The colour system is built around thermal contrast: deep madder backgrounds abso
 Each experiment in the R&D Index has a unique signal colour drawn from a five-stop accent palette. These are the only hues allowed beyond Ember & Earth.
 
 | Token | Hex | Name | Experiment |
-|---|---|---|---|
+|–––|–––|–––|–––|
 | `$color-signal-01` | `#ff3c00` | Burnt Orange | EXP-01 |
 | `$color-signal-02` | `#dfff00` | Acid Lime | EXP-02 |
 | `$color-signal-03` | `#26C6DA` | Steel Teal | EXP-03 |
@@ -310,7 +300,7 @@ Styles split across three layers, all using `@use` (never `@import`):
 ## Page Sections
 
 | Section | Anchor | Description |
-|---|---|---|
+|–––|–––|–––|
 | Header / Nav | — | Fixed, scroll-state background, TextScramble on nav links |
 | Hero | `#hero` | Full-screen Syne headline, mouse parallax, footer bar |
 | Marquee | — | Auto-scrolling JetBrains Mono tech ticker |
