@@ -1,11 +1,11 @@
 // MoFlow Lab — abstracts/_variables.scss
-//  Design tokens: colours, spacing, typography, layout, z-index, easing
+//  Design tokens: colors, spacing, typography, layout, z-index, easing
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-// ─── Colour palette — Ember & Earth ─────────────────────────
+// ─── Color palette — Ember & Earth ─────────────────────────
 //
 //  Background family
-$color-bg:           #2C0E0E;   // Deep Oxblood — page background
+$color-bg:           #2C0E0E;   // Deep Madder — page background
 $color-bg-elevated:  #3d1414;   // Raised surface (cards, hover states)
 $color-bg-surface:   #4d1c1c;   // Higher surface (tooltips, popovers)
 //
@@ -25,7 +25,7 @@ $color-border-hover: rgba(244, 235, 208, 0.2);   // Parchment at mid opacity
 //  Utility
 $color-white:        #ffffff;
 //
-//  Signal colours — experiment accent palette
+//  Signal colors — experiment accent palette
 //  Used in projects.json gradients and hover states
 $color-signal-01:    #FF7043;   // Burnt Orange  — EXP-01
 $color-signal-02:    #D4E157;   // Acid Lime     — EXP-02
@@ -115,3 +115,36 @@ $copy-contact-label:     'Open for Collaboration';
 $copy-contact-headline:  'Got a hard problem to solve?';
 $copy-contact-email:     'modrak@moflowlab.com';
 $copy-footer-tagline:    'R&D v1.0 — Experiments ongoing.';
+
+:root {
+	// ─── Color palette — Ember & Earth ─────────────────────────
+//
+//  Background family
+--color-bg:           #2C0E0E;   // Deep Madder — page background
+--color-bg-elevated:  #3d1414;   // Raised surface (cards, hover states)
+--color-bg-surface:   #4d1c1c;   // Higher surface (tooltips, popovers)
+//
+//  Text family
+--color-text:         #F4EBD0;   // Cream/Parchment — primary body text
+--color-text-muted:   #9e8a6e;   // Mid-tone warm grey — metadata, labels
+--color-text-dim:     #5c4a38;   // Low-contrast — index numbers, dividers
+//
+//  Accent — primary interactive colour
+--color-accent:       #FF7043;   // Burnt Orange — CTAs, highlights, cursor dot
+--color-accent-dim:   rgba(255, 112, 67, 0.12);  // Accent wash for backgrounds
+//
+//  Border family
+--color-border:       rgba(244, 235, 208, 0.08);  // Parchment at low opacity
+--color-border-hover: rgba(244, 235, 208, 0.2);   // Parchment at mid opacity
+//
+//  Utility
+--color-white:        #ffffff;
+//
+//  Signal colors — experiment accent palette
+//  Used in projects.json gradients and hover states
+--color-signal-01:    #FF7043;   // Burnt Orange  — EXP-01
+--color-signal-02:    #D4E157;   // Acid Lime     — EXP-02
+--color-signal-03:    #26C6DA;   // Steel Teal    — EXP-03
+--color-signal-04:    #EC407A;   // Electric Rose — EXP-04
+--color-signal-05:    #FFA726;   // Amber Gold    — EXP-05
+}

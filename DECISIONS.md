@@ -194,3 +194,15 @@ Implemented `fnm` (Fast Node Manager) to upgrade the Node.js runtime from `22.11
 
 ### Rationale
 Vite 8 requires Node.js `22.12+` as a minimum. The environment was running `22.11.0`, creating a version mismatch that blocked compatibility with the latest build engine features. `fnm` was chosen as the version manager to enforce this constraint going forward.
+
+## [P02-S02] CSS Custom Properties Convention · March 23, 2026
+
+### Decision
+Introduced CSS custom properties alongside existing SCSS variables, mirroring the naming convention exactly (`--color-*` matches `$color-*`), with all declarations consolidated in a single `:root` block.
+
+### Rationale
+**CSS Custom Properties vs SCSS Variables:** SCSS variables are compile-time constructs - they are resolved and inlined during the build, leaving no trace output CSS. CSS custom properties, by contrast, are runtime tokens that persist in the browser. This makes them the correct tool for dynamic theming, JavaScript interop, and any value that needs to be read or muted after the stylesheet has been parsed.
+
+**Mirrored Naming Convention:** The `--color-*` / `$color-*` parallel is intentional. A single source of truth is maintained at the SCSS level, with custom properties acting as the runtime projection of that same system. The mirrored names make the relationship explicit and elimination ambiguity when switching contest between build-time and runtime logic.
+
+**`:root` Block Placement:** The `:root` block lives in the `_variables.scss` (imported at the top of the main entry partial). Centralizing all custom property declarations here ensures they are globally scoped, declared before any consuming rules, and easy to audit as the single authoritative token surface of the design system.
