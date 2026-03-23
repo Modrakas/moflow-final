@@ -308,3 +308,37 @@ does nothing.
 
 Now there's one contract to maintain. Move or rename a partial, fix it in
 `_index.scss` — not in every file that was importing it directly.
+
+---
+
+## [P02-S06] TypeScript Motion Token Mirror · March 23, 2026
+
+### Decision
+Created a `tokens.ts` file exporting a `TOKENS` object with `as const`,
+covering GSAP easing strings and duration values. Delay stagger multipliers
+excluded.
+
+### Rationale
+
+**Why a separate TS file when SCSS tokens already exist:**
+SCSS variables don't exist at runtime. By the time the browser runs the JS,
+Sass is long gone — it compiled and left. GSAP runs in JavaScript, so it
+needs the values in JavaScript. There's no bridge. The TS file is just the
+motion token system's runtime copy, the same way CSS custom properties are
+the runtime copy of SCSS variables.
+
+**Why `as const`:**
+Without it, TypeScript widens every value — `'power3.out'` becomes `string`,
+`0.8` becomes `number`. That means the compiler can't catch a typo in an
+easing name or a wrong duration key. `as const` locks the values to their
+exact literals so the types are actually useful. An explicit interface would
+do the opposite — it would actively widen the types back to `string` and
+`number`, which is worse than nothing. If I ever need the type somewhere else
+I can just derive it with `type MotionTokens = typeof TOKENS`.
+
+**Why delays are excluded:**
+The delays in the legacy code aren't fixed values — they're all stagger
+multipliers computed at runtime: `i * 0.07`, `i * 0.05`. Putting those in
+the token file would mean freezing an arbitrary number that only makes sense
+as part of a formula. The stagger factor belongs at the call site, not in a
+constants file.
